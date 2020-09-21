@@ -32,5 +32,13 @@ dt1<-data.table(x=rep(c("a","b","c"),each=3),y=rnorm(9))
 dt2<-data.table(x=rep(c("a","b","d"),each=3),y=rnorm(9))
 setkey(dt1,x); setkey(dt2,x)
 merge(dt1,dt2)
+#quick reading
+bigd<-data.frame(x=rnorm(1E5),y=rnorm(1E5))
+file<-tempfile()
+write.table(bigd,file,sep = "/t",quote = FALSE,row.names = FALSE,col.names = FALSE)
+system.time(fread(file))
+#compare
+system.time(read.table(file,header = TRUE,sep = "\t"))
+
 
 
