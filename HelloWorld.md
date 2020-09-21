@@ -23,5 +23,14 @@ DF[,w:=z^2]
 set.seed(123)
 DT<-data.table(x=sample(letters[1:3],1E5,TRUE))
 DT[,.N,by=x]
+#use setkey to subset and joint 
+dt<-data.table(x=rep(c("a","b","c"),each=100),y=rnorm(300))
+setkey(dt,x)
+dt['a']
+
+dt1<-data.table(x=rep(c("a","b","c"),each=3),y=rnorm(9))
+dt2<-data.table(x=rep(c("a","b","d"),each=3),y=rnorm(9))
+setkey(dt1,x); setkey(dt2,x)
+merge(dt1,dt2)
 
 
